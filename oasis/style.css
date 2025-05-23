@@ -103,7 +103,7 @@ body {
   position: relative;
   text-align: center;
   padding: 5rem 1rem;
-  background: transparent; /* Fixed: allow .heart-3d to show */
+  background: transparent; 
   overflow: hidden;
 }
 
@@ -219,7 +219,7 @@ body {
 
 .features {
   padding: 4rem 1rem;
-  background-color: #fa99f5;
+  background-color: #fbd6fb;
 }
 
 .section-title {
