@@ -262,3 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // pidgin is not auto-detected, default to English
   setLanguage(lang);
 });
+
+  window.addEventListener('load', function() {
+    document.getElementById('preloader').style.display = 'none';
+  });

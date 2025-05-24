@@ -341,11 +341,14 @@ body {
     font-size: 1.1rem;
     margin-left: 0;
     margin-right: 13px;
+    margin-top: 10px;
+    margin-bottom: 0;
     flex-shrink: 0;
     text-align: center;
     width: auto;
     flex: 1 1 auto;
     display: block;
+    justify-content: center;
     order: 2;
   }
 
