@@ -98,9 +98,10 @@ input[type='number'] {
 	content: "";
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 7px;
 	bottom: 0;
 	width: 5px;
+	height: 25px;
 	background-color: var(--color-oasis-pink);
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
