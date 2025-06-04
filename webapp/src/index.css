@@ -3,7 +3,7 @@
 
 
 
-*{
+* {
 	box-sizing: border-box;
 	font-family: 'Inter', sans-serif;
 	font-optical-sizing: auto;
@@ -11,10 +11,10 @@
 }
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-/* 
+	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+	/* 
   color-scheme: light dark; */
 }
 
@@ -27,12 +27,12 @@
 }
 
 .btn {
-background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%), #2F1F49;
-box-shadow: 0px 1px 2px rgba(14, 18, 27, 0.24), 0px 0px 0px 1px;
-border-radius: 10px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%), #2F1F49;
+	box-shadow: 0px 1px 2px rgba(14, 18, 27, 0.24), 0px 0px 0px 1px;
+	border-radius: 10px;
 }
 
-.btn:disabled{
+.btn:disabled {
 	background: rgb(207, 200, 200);
 }
 
@@ -47,7 +47,7 @@ label {
 	font-weight: 600;
 }
 
-.range::-webkit-slider-thumb{
+.range::-webkit-slider-thumb {
 	display: none;
 	appearance: none;
 	-webkit-appearance: none;
@@ -62,7 +62,7 @@ label {
 	background: transparent;
 }
 
-.range:focus{
+.range:focus {
 	outline: none;
 }
 
@@ -71,24 +71,44 @@ label {
 	border-radius: 9999px;
 }
 
-#weak::-webkit-slider-runnable-track{
+#weak::-webkit-slider-runnable-track {
 	background-color: rgba(251, 55, 72, 1);
 }
 
-#medium::-webkit-slider-runnable-track{
+#medium::-webkit-slider-runnable-track {
 	background-color: rgba(250, 115, 25, 1);
 }
 
-#strong::-webkit-slider-runnable-track{
+#strong::-webkit-slider-runnable-track {
 	background-color: rgba(31, 193, 107, 1);
 }
 
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 input[type='number'] {
-  -moz-appearance: textfield; /* Also needed for consistency */
+	-moz-appearance: textfield;
+	/* Also needed for consistency */
+}
+
+.active::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 5px;
+	background-color: var(--color-oasis-pink);
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.active {
+	background: rgba(91, 65, 133, 1);
+	.icon {
+		fill: var(--color-oasis-pink);
+	}
 }
