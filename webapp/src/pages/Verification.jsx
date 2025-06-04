@@ -5,12 +5,13 @@ import Navbar from './Navbar'
 import mail from '../assets/icons/mail-line.png'
 
 
-function Verification() {
+function Verification({mode, type}) {
 	const inputCount = 4;
 	const [code, setCode] = useState(new Array(inputCount).fill(''));
 	const [isVerified, setIsVerified] = useState(false);
 	const [changeEmail, setChangeEmail] = useState(false);
 	const inputsRef = useRef([]);
+	let btnText = type === 'reset' ? 'Reset password' : 'Verify';
 
 	const handleChange = (e, index) => {
 		const value = e.target.value;
@@ -41,14 +42,22 @@ function Verification() {
 			setCode(newCode);
 		}
 
-		// Optional: prevent arrow navigation or paste if needed
 	};
+
+	useEffect(() => {
+		const verify = document.getElementById('verify');
+		let count = 0;
+		code.map((code) => {
+			code !== '' && count++;
+		})
+		count < 4 ? verify.disabled = true : verify.disabled = false
+	}, [code]);
 
 	return (
 		<div className='md:grid md:grid-cols-2'>
 			<SignUpSlider />
 			<div>
-				<Navbar />
+				<Navbar mode={mode}/>
 				<div className='lg:pl-30 lg:pr-30 sm:pr-20 sm:pl-20 pr-10 pl-10 ml-auto mr-auto mb-0 mt-20 md:mt-5 overflow-hidden'>
 					<div className='rounded-full bg-fuchsia-100 w-30 h-30 flex justify-center items-center mb-0 mt-0 ml-auto mr-auto'>
 						<div className='rounded-full bg-white w-20 h-20 flex justify-center items-center'>
@@ -85,7 +94,7 @@ function Verification() {
 										/>
 									))}
 								</div>}
-							{changeEmail ? <input type="submit" value="Change Email" className='w-[100%] text-oasis-white text-2xl p-3 btn input mb-20 md:mb-5' id='change-email' onClick={() => setChangeEmail(false)}/> : isVerified ? <input type="submit" value="Proceed to dashboard" className='w-[100%] text-oasis-white text-2xl p-3 btn input mb-20 md:mb-5' id='to-dashboard' /> : <input type="submit" value="Verify" className='w-[100%] text-oasis-white text-2xl p-3 btn input mb-20 md:mb-5' id='verify' disabled />}
+							{changeEmail ? <input type="submit" value="Change Email" className='w-[100%] text-oasis-white text-2xl p-3 btn input mb-20 md:mb-5' id='change-email' onClick={() => setChangeEmail(false)}/> : isVerified ? <input type="submit" value="Proceed to dashboard" className='w-[100%] text-oasis-white text-2xl p-3 btn input mb-20 md:mb-5' id='to-dashboard' /> : <input type="submit" value={btnText} className='w-[100%] text-oasis-white text-2xl p-3 btn input mb-20 md:mb-5' id='verify' disabled />}
 						</form>
 						{changeEmail || isVerified ? '' : <div className='text-xl text-center'>
 							<p className='text-gray-500 text-lg font-[400]'>Experiencing issues receiving the code?</p>

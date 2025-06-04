@@ -8,6 +8,7 @@ import mail from '../assets/icons/mail-line.png'
 import apple from '../assets/icons/Vector.png'
 import google from '../assets/icons/google.png'
 import check from '../assets/icons/select-box-circle-fill.png'
+import fb from '../assets/icons/Facebook.png'
 import Navbar from './Navbar'
 import SignUpSlider from '../components/SignUpSlider'
 
@@ -71,7 +72,7 @@ function SignUp() {
 		<div className='md:grid md:grid-cols-2'>
 			<SignUpSlider />
 			<div>
-				<Navbar/>
+				<Navbar mode='signup'/>
 		<div className='lg:pr-50 lg:pl-50 md:pl-30 md:pr-30 sm:pr-20 sm:pl-20 pr-10 pl-10 ml-auto mr-auto mb-0 mt-20 md:mt-5 overflow-hidden'>
 			<div className='rounded-full bg-fuchsia-100 w-30 h-30 flex justify-center items-center mb-0 mt-0 ml-auto mr-auto'>
 				<div className='rounded-full bg-white w-20 h-20 flex justify-center items-center'>
@@ -82,9 +83,12 @@ function SignUp() {
 				<h1 className='text-4xl'>Create a new account</h1>
 				<h2 className='text-2xl text-gray-600 mt-1'>Enter your details to register</h2>
 			</div>
-			<div className='ml-auto mr-auto grid grid-cols-2 gap-4 mt-15'>
+			<div className='ml-auto mr-auto grid grid-cols-3 gap-4 mt-15'>
 				<div className='border-[2px] rounded-2xl border-gray-200 w-[100%] flex justify-center items-center pt-2 pb-2'>
 					<img src={apple} width={15} alt="apple sign up" />
+				</div>
+				<div className='border-[2px] rounded-2xl border-gray-200 w-[100%] flex justify-center items-center pt-2 pb-2'>
+					<img src={fb} width={15} alt="facebook sign up" />
 				</div>
 				<div className='border-[2px] rounded-2xl border-gray-200 w-[100%] flex justify-center items-center pt-2 pb-2'>
 					<img src={google} alt="google sign up" width={20} />

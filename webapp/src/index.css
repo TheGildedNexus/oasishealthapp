@@ -33,7 +33,7 @@ border-radius: 10px;
 }
 
 .btn:disabled{
-	background: gray;
+	background: rgb(207, 200, 200);
 }
 
 .input {
