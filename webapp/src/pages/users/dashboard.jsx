@@ -77,13 +77,17 @@ function Dashboard() {
 						<RiCalendarFill size={15} color='rgba(92, 92, 92, 1)'/>
 						<p className='font-[500] text-lg'>Today Schedule</p>
 						</div>
-						{/* <div> */}
-							<thead className='flex items-center w-[100%] justify-evenly bg-[#F7F7F7] p-3 rounded-xl'>
+						<div>
+							<table className='w-[100%]'>
+							<thead className='w-[100%]'>
+							<tr className='flex items-center w-[100%] justify-evenly bg-[#F7F7F7] p-3 rounded-xl'>
 								<th className='w-[100%] text-left text-gray-300 font-[400]'>Name</th>
 								<th className='w-[100%] text-left text-gray-300 font-[400]'>Time</th>
 								<th className='w-[100%] text-left text-gray-300 font-[400]'>Status</th>
+							</tr>
 							</thead>
-						{/* </div> */}
+							</table>
+						</div>
 						<div className='relative w-[100%] h-[100%]'>
 						{isEmpty ? <div className='absolute top-1/2 left-1/2 -translate-1/2 flex items-center flex-col justify-center'>
 							<img src={empty} alt="" className='mb-5'/>
