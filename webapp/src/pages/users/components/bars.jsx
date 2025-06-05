@@ -54,7 +54,7 @@ export function NavBar() {
 
 		if (!fetchedTabs.current.has(tabId)) {
 			// Simulate fetch delay
-			await new Promise((resolve) => setTimeout(resolve, 2000));
+			// await new Promise((resolve) => setTimeout(resolve, 2000));
 			// If using real fetch:
 			// const res = await fetch(`/api/${tabId}`);
 			// await res.json();
