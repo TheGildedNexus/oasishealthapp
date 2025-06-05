@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
 
 
 
 * {
 	box-sizing: border-box;
-	font-family: 'Inter', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-optical-sizing: auto;
 	font-style: normal;
 }
@@ -24,6 +24,13 @@
 	--color-oasis-pink: #FA99F5;
 	--color-oasis-lilac: #FBD6FB;
 	--color-oasis-white: #ECE8F0;
+	--color-info-pink: rgba(255, 243, 235, 1);
+	--color-info-yellow: rgba(255, 253, 234, 1);
+	--color-info-blue: rgba(235, 241, 255, 1);
+	--color-info-green: rgba(224, 250, 236, 1);
+	--color-info-red: rgba(255, 235, 236, 1);
+	--color-misc-pink: rgba(251, 214, 251, 0.5);
+	--color-misc-white: rgba(250, 249, 251, 1);
 }
 
 .btn {
