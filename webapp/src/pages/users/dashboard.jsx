@@ -6,6 +6,97 @@ import { NavBar, SideBar } from './components/bars'
 
 function Dashboard() {
 	const [isEmpty, setIsEmpty] = useState(true);
+	const date = new Date();
+	// setIsEmpty(false)
+	const addHours = (date, hours) =>{
+		const copy = new Date(date);
+		copy.setHours(copy.getHours() + hours)
+		return copy;
+	}
+	
+	const mockDB = [
+		{
+			name: "Metformin",
+			size: "550mg",
+			time: addHours(date, -1).toLocaleTimeString('en-US', {
+				hour: 'numeric',
+				minute: '2-digit',
+				hour12: true
+			}),
+			status: 'completed',
+		},
+		{
+			name: "Metformin",
+			size: "550mg",
+			time: addHours(date, 2).toLocaleTimeString('en-US', {
+				hour: 'numeric',
+				minute: '2-digit',
+				hour12: true
+			}),
+			status: 'pending',
+		},
+		{
+			name: "Metformin",
+			size: "550mg",
+			time: addHours(date, 3).toLocaleTimeString('en-US', {
+				hour: 'numeric',
+				minute: '2-digit',
+				hour12: true
+			}),
+			status: 'pending',
+		},
+		{
+			name: "Metformin",
+			size: "550mg",
+			time: addHours(date, 3).toLocaleTimeString('en-US', {
+				hour: 'numeric',
+				minute: '2-digit',
+				hour12: true
+			}),
+			status: 'pending',
+		},
+		{
+			name: "Metformin",
+			size: "550mg",
+			time: addHours(date, 2).toLocaleTimeString('en-US', {
+				hour: 'numeric',
+				minute: '2-digit',
+				hour12: true
+			}),
+			status: 'pending',
+		},
+		{
+			name: "Metformin",
+			size: "550mg",
+			time: addHours(date, -2).toLocaleTimeString('en-US', {
+				hour: 'numeric',
+				minute: '2-digit',
+				hour12: true
+			}),
+			status: 'completed',
+		},
+		{
+			name: "Metformin",
+			size: "550mg",
+			time: addHours(date, -3).toLocaleTimeString('en-US', {
+				hour: 'numeric',
+				minute: '2-digit',
+				hour12: true
+			}),
+			status: 'missed',
+		},
+		{
+			name: "Metformin",
+			size: "550mg",
+			time: addHours(date, -2).toLocaleTimeString('en-US', {
+				hour: 'numeric',
+				minute: '2-digit',
+				hour12: true
+			}),
+			status: 'missed',
+		}
+	]
+	console.log(mockDB)
 
 	return (
 		<div className='grid grid-cols-[auto_1fr] gap-4'>
