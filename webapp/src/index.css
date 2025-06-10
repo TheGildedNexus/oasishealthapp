@@ -90,6 +90,10 @@ label {
 	background-color: rgba(31, 193, 107, 1);
 }
 
+.scrollbar-hide::-webkit-scrollbar{
+	display: none;
+}
+
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
 	-webkit-appearance: none;
