@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { RiCalendarLine, RiSearch2Line, RiNotification3Line, RiCalendarCheckLine, RiArrowDownSLine, RiMedicineBottleFill, RiCalendarScheduleFill, RiCheckboxCircleFill, RiAlertFill, RiCalendarFill, RiAddFill, RiTimeFill } from '@remixicon/react'
+import { RiCalendarLine, RiSearch2Line, RiNotification3Line, RiCalendarCheckLine, RiArrowDownSLine, RiMedicineBottleFill, RiCalendarScheduleFill, RiCheckboxCircleFill, RiAlertFill, RiCalendarFill, RiAddFill, RiTimeFill, RiArrowRightSLine, RiInformation2Fill, RiProgress2Fill } from '@remixicon/react'
 import empty from '../../assets/images/empty-states.png'
-import { NavBar, SideBar } from './components/bars'
+import { NavBar, ProgressBar, SideBar } from './components/bars'
 
 
 function Dashboard() {
@@ -14,7 +14,7 @@ function Dashboard() {
 		return copy;
 	}
 
-	const mockDB = [
+	let mockDB = [
 		{
 			name: "Metformin",
 			size: "550mg",
@@ -85,12 +85,15 @@ function Dashboard() {
 		return a.time > b.time ? 1 : -1;
 	})
 
+	mockDB = mockDB.filter((item) => item.time.getDate() === date.getDate())
+	console.log(mockDB)
+
 
 	const totalDaily = mockDB.length;
-	const taken = mockDB.filter(item=>item.status === 'completed').length;
-	const missed = mockDB.filter(item=>item.status === 'missed').length;
-	const active = mockDB.filter(item=>item.status==='pending').length;
-	const nextMed = mockDB.filter(item=>item.status==='pending')[0];
+	const taken = mockDB.filter(item => item.status === 'completed').length;
+	const missed = mockDB.filter(item => item.status === 'missed').length;
+	const active = mockDB.filter(item => item.status === 'pending').length;
+	const nextMed = mockDB.filter(item => item.status === 'pending')[0];
 
 
 
@@ -136,11 +139,11 @@ function Dashboard() {
 						</div>
 						<div>
 							<h3 className='text-md text-gray-500 font-[400]'>Next Reminder</h3>
-							<p className='text-2xl font-[400]'>{nextMed.time.toLocaleTimeString('en-US', {
+							<p className='text-2xl font-[400]'>{nextMed && nextMed.time.toLocaleTimeString('en-US', {
 								hour: 'numeric',
 								minute: '2-digit',
 								hour12: true
-							})}</p>
+							}) || '-'}</p>
 						</div>
 					</div>
 					<div className='flex items-center w-65 shadow-md rounded-2xl p-3 border-1 border-gray-200'>
@@ -164,9 +167,14 @@ function Dashboard() {
 				</div>
 				<section className='grid grid-cols-[1fr_auto] gap-4 m-5 mt-10'>
 					<div className='border-1 border-gray-200 rounded-2xl p-4 h-[400px] relative flex flex-col scrollbar-hide'>
-						<div className='flex items-center gap-2 mb-5'>
+						<div className='flex items-center justify-between gap-2 mb-5'>
+							<div className='flex items-center gap-2'>
 							<RiCalendarFill size={15} color='rgba(92, 92, 92, 1)' />
-							<p className='font-[500] text-lg'>Today Schedule</p>
+							<p className='font-[500] text-[12px]'>Today Schedule</p>
+							</div>
+							<div className='px-3 py-1 rounded-lg text-sm text-gray-500 shadow-sm border border-gray-300'>
+								<p>See All</p>
+							</div>
 						</div>
 						<div className='w-full h-full relative overflow-auto scrollbar-hide'>
 							<table className='w-full table-fixed'>
@@ -178,61 +186,78 @@ function Dashboard() {
 										<th className='w-1/4 text-left px-4 py-2 text-gray-300 font-[400]'></th>
 									</tr>
 								</thead>
-								</table>
-								<div className="max-h-[300px] overflow-y-auto">
-								<table className="w-full table-fixed text-sm font-[500]">
-								{isEmpty ?
-									<tbody className='absolute top-1/2 left-1/2 -translate-1/2'>
-										<tr className='h-[100%] w-[100%]'>
-											<td className='h-[100%] w-[100%] flex items-center flex-col justify-center'>
-												<img src={empty} alt="" className='mb-5' />
-												<p className='text-gray-400 text-sm'>There are no records of schedule yet</p>
-												<button className='flex items-center text-oasis-indigo p-2 bg-misc-pink rounded-lg mt-3'>
-													<RiAddFill size={15} color='var(--color-oasis-indigo)' className='mr-2' />
-													<p>Create Schedule</p>
-												</button>
-											</td>
-										</tr>
-									</tbody> :
-									<tbody className='text-sm font-[500]'>
-										{mockDB.map((item) => (
-											<tr>
-												<td className='w-1/4 text-left px-4 py-2'><p>{item.name}</p>
-												<p className='text-gray-500'>{item.size}</p></td>
-												<td className='w-1/4 text-left px-4 py-2 font-[400]'>{item.time.toLocaleTimeString('en-US', {
-													hour: 'numeric',
-													minute: '2-digit',
-													hour12: true,
-												})}</td>
-												<td className='w-1/4 text-left px-4 py-2'>{
-													item.status === 'completed' ?
-														<div className='w-fit py-1 px-2 h-fit bg-info-green flex items-center justify-center rounded-full mr-2 text-sm font-[500] font-["Inter",sans-serif] text-[rgba(31,193,107,1)] gap-1'>
-															<RiCheckboxCircleFill color='rgba(31, 193, 107, 1)' className='relative ricon' size={12} />
-															<p>Completed</p>
-														</div> :
-														item.status === 'pending' ? <div className='w-fit h-fit py-1 px-2 gap-1 bg-info-blue flex items-center justify-center rounded-full text-sm font-[500] mr-2 text-[rgba(51,92,255,1)]'>
-															<RiTimeFill color='rgba(51, 92, 255, 1)' className='relative ricon' size={12} />
-															<p>Pending</p>
-														</div> :
-															<div className='w-fit h-fit py-1 px-2 gap-1 bg-info-red flex items-center justify-center rounded-full text-sm font-[500] mr-2 text-[rgba(251,55,72,1)]'>
-																<RiAlertFill color='rgba(251, 55, 72, 1)' className='relative ricon' size={12} />
-																<p>Missed</p>
-															</div>
-												}</td>
-												<td className='w-1/4 text-left px-4 py-2'>{
-													item.status !== 'missed' ? 
-													<button className='border border-gray-300 w-[70%] text-sm p-2 rounded-xl text-gray-700 shadow-md'>{item.status === 'completed' ? "Undo" : "Mark as Taken"}</button>:
-													<button className='border border-gray-300 w-[70%] text-sm p-2 rounded-xl text-gray-400' disabled>Undo</button>
-													}</td>
-											</tr>
-										))}
-									</tbody>
-								}
 							</table>
+							<div className="max-h-[300px] overflow-y-auto">
+								<table className="w-full table-fixed text-sm font-[500]">
+									{isEmpty ?
+										<tbody className='absolute top-1/2 left-1/2 -translate-1/2'>
+											<tr className='h-[100%] w-[100%]'>
+												<td className='h-[100%] w-[100%] flex items-center flex-col justify-center'>
+													<img src={empty} alt="" className='mb-5' />
+													<p className='text-gray-400 text-sm'>There are no records of schedule yet</p>
+													<button className='flex items-center text-oasis-indigo p-2 bg-misc-pink rounded-lg mt-3'>
+														<RiAddFill size={15} color='var(--color-oasis-indigo)' className='mr-2' />
+														<p>Create Schedule</p>
+													</button>
+												</td>
+											</tr>
+										</tbody> :
+										<tbody className='text-sm font-[500]'>
+											{mockDB.map((item) => (
+												<tr>
+													<td className='w-1/4 text-left px-4 py-2 text-[12px]'><p>{item.name}</p>
+														<p className='text-gray-500'>{item.size}</p></td>
+													<td className='w-1/4 text-left px-4 py-2 font-[400]'>{item.time.toLocaleTimeString('en-US', {
+														hour: 'numeric',
+														minute: '2-digit',
+														hour12: true,
+													})}</td>
+													<td className='w-1/4 text-left px-4 py-2'>{
+														item.status === 'completed' ?
+															<div className='w-fit py-1 px-2 h-fit bg-info-green flex items-center justify-center rounded-full mr-2 text-sm font-[500] font-["Inter",sans-serif] text-[rgba(31,193,107,1)] gap-1'>
+																<RiCheckboxCircleFill color='rgba(31, 193, 107, 1)' className='relative ricon' size={12} />
+																<p>Completed</p>
+															</div> :
+															item.status === 'pending' ? <div className='w-fit h-fit py-1 px-2 gap-1 bg-info-blue flex items-center justify-center rounded-full text-sm font-[500] mr-2 text-[rgba(51,92,255,1)]'>
+																<RiTimeFill color='rgba(51, 92, 255, 1)' className='relative ricon' size={12} />
+																<p>Pending</p>
+															</div> :
+																<div className='w-fit h-fit py-1 px-2 gap-1 bg-info-red flex items-center justify-center rounded-full text-sm font-[500] mr-2 text-[rgba(251,55,72,1)]'>
+																	<RiAlertFill color='rgba(251, 55, 72, 1)' className='relative ricon' size={12} />
+																	<p>Missed</p>
+																</div>
+													}</td>
+													<td className='w-1/4 text-left px-4 py-2'>{
+														item.status !== 'missed' ?
+															<button className='border border-gray-300 w-[70%] text-sm p-2 rounded-xl text-gray-700 shadow-md'>{item.status === 'completed' ? "Undo" : "Mark as Taken"}</button> :
+															<button className='border border-gray-300 w-[70%] text-sm p-2 rounded-xl text-gray-400' disabled>Undo</button>
+													}</td>
+												</tr>
+											))}
+										</tbody>
+									}
+								</table>
 							</div>
 						</div>
 					</div>
+					<div className='overflow-auto scrollbar-hide max-h-[400px] flex flex-col gap-3'>
+			<div className='relative px-5 py-2 bg-misc-white'>
+				<div className='flex items-center gap-2 border-b border-b-gray-300 pb-2 mb-5'>
+					<RiProgress2Fill size={20} color='black' />
+					<h3 className='text-black font-[500] text-lg'>Stay On Track</h3>
+				</div>
+				<div className='flex items-center gap-3'>
+					<div className='w-[70px] h-[70px]'>
+					<ProgressBar progress={60} size={150}/>
+					</div>
+					<div className='flex flex-col gap-3 w-[100%]'>
+					<p className='text-sm text-gray-700 font-[600]'>You are getting better at this</p>
+					<p className='text-gray-400 text-sm'>You've taken {60}% of your medications this week.<br/>Keep up the great work!</p>
+					</div>
+				</div>
+			</div>
 					<SideBar />
+					</div>
 				</section>
 			</div>
 		</div>

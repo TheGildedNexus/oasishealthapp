@@ -12,7 +12,7 @@ export function SideBar() {
 	return (
 
 		<div className='w-[447px] flex flex-col gap-3'>
-			<div className='bg-info-yellow flex flex-col gap-3 relative p-5'>
+			<div className='bg-info-yellow flex flex-col gap-3 relative px-5 py-2'>
 				<h2 className='text-2xl font-[500]'>Need Medical Advice?</h2>
 				<p className='text-sm/[20px] tracking-[0.25%] max-w-[351px] text-gray-500 font-[400]'>Chat with licensed doctors anytime you're unsure about a does, side effects, or next steps.</p>
 				<button className='flex items-center p-2 bg-oasis-indigo rounded-lg w-[45%] justify-center'>
@@ -21,8 +21,8 @@ export function SideBar() {
 				</button>
 				<img src={docnurse} alt="" width={94} className='absolute bottom-0 right-2' />
 			</div>
-			<div className='relative p-5 bg-misc-white'>
-				<div className='flex items-center gap-2 border-b border-b-gray-300 pb-5 pt-5 mb-5'>
+			<div className='relative px-5 py-2 bg-misc-white'>
+				<div className='flex items-center gap-2 border-b border-b-gray-300 pb-2 mb-5'>
 					<RiInformation2Fill size={20} color='rgba(92, 92, 92, 1)' />
 					<h3 className='text-gray-600 font-[500] text-lg'>Don't Miss Out on any Schedule</h3>
 				</div>
@@ -149,3 +149,50 @@ export function NavBar() {
 		</div>
 	)
 }
+
+
+export function ProgressBar({progress = 0,size = 120}){
+	const circleRef = useRef(null);
+  const stroke = 10;
+  const radius = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * radius;
+
+  useEffect(() => {
+    const offset = circumference - (progress / 100) * circumference;
+    if (circleRef.current) {
+      circleRef.current.style.strokeDashoffset = offset;
+    }
+  }, [progress, circumference]);
+	 return (
+	 <div className="relative w-[100%] max-w-[200px] aspect-square">
+      <svg viewBox={`0 0 ${size} ${size}`} className="rotate-[-90deg]">
+        {/* Track */}
+        <circle
+          stroke="#e5e7eb"
+          fill="transparent"
+          strokeWidth={stroke}
+          r={radius}
+          cx={size / 2}
+          cy={size / 2}
+        />
+        {/* Progress */}
+        <circle
+          ref={circleRef}
+          stroke="var(--color-oasis-pink)"
+          fill="transparent"
+          strokeWidth={stroke}
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          strokeDashoffset={circumference}
+          r={radius}
+          cx={size / 2}
+          cy={size / 2}
+          className="transition-all duration-500"
+        />
+      </svg>
+      {/* Text */}
+      <div className="absolute inset-0 flex items-center justify-center text-gray-700 font-semibold text-lg">
+        {progress}%
+      </div>
+    </div>
+)}
