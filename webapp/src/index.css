@@ -124,3 +124,11 @@ input[type='number'] {
 		fill: var(--color-oasis-pink);
 	}
 }
+
+.medfilterbtn{
+	background-color: white;
+	color: black;
+	font-weight: 500;
+	padding: 5px;
+	border-radius: 5px;
+}

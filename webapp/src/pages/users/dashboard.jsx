@@ -1,92 +1,16 @@
 import React, { useState } from 'react'
-import { RiCalendarLine, RiSearch2Line, RiNotification3Line, RiCalendarCheckLine, RiArrowDownSLine, RiMedicineBottleFill, RiCalendarScheduleFill, RiCheckboxCircleFill, RiAlertFill, RiCalendarFill, RiAddFill, RiTimeFill, RiArrowRightSLine, RiInformation2Fill, RiProgress2Fill } from '@remixicon/react'
+import { RiCalendarLine, RiMedicineBottleFill, RiCalendarScheduleFill, RiCheckboxCircleFill, RiAlertFill, RiCalendarFill, RiAddFill, RiTimeFill, RiProgress2Fill } from '@remixicon/react'
 import empty from '../../assets/images/empty-states.png'
-import { NavBar, ProgressBar, SideBar } from './components/bars'
+import { NavBar, ProgressBar, SideBar, TopBar } from './components/bars'
+import { mockDb, timeOfDay } from './components/misc';
 
 
 function Dashboard() {
 	const [isEmpty, setIsEmpty] = useState(false);
 	const date = new Date();
 	// setIsEmpty(false)
-	const addHours = (date, hours) => {
-		const copy = new Date(date);
-		copy.setHours(copy.getHours() + hours)
-		return copy;
-	}
 
-	let mockDB = [
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, -1),
-			status: 'completed',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, 4),
-			status: 'pending',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, 1),
-			status: 'pending',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, 2),
-			status: 'pending',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, 1),
-			status: 'pending',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, 3),
-			status: 'pending',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, 3),
-			status: 'pending',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, 2),
-			status: 'pending',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, -2),
-			status: 'completed',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, -3),
-			status: 'missed',
-		},
-		{
-			name: "Metformin",
-			size: "550mg",
-			time: addHours(date, -2),
-			status: 'missed',
-		}
-	].sort((a, b) => {
-		return a.time > b.time ? 1 : -1;
-	})
-
-	mockDB = mockDB.filter((item) => item.time.getDate() === date.getDate())
-	console.log(mockDB)
+	const mockDB = mockDb.filter((item) => item.time.getDate() === date.getDate())
 
 
 	const totalDaily = mockDB.length;
@@ -100,22 +24,11 @@ function Dashboard() {
 	return (
 		<div className='grid grid-cols-[auto_1fr] gap-4'>
 			<NavBar />
-			<div className=''>
-				<div className='flex justify-between items-center m-5 border-b-1 border-gray-300 pb-5'>
-					<h1 className='text-3xl'>Dashboard</h1>
-					<div className='flex items-center justify-evenly w-70 '>
-						<RiSearch2Line size={15} />
-						<RiNotification3Line size={15} />
-						<div className='flex items-center justify-evenly cursor-pointer w-45 border-1 border-gray-200 p-2 rounded-xl'>
-							<RiCalendarCheckLine size={15} />
-							<h3 className='text-sm font-[400]'>Quick Actions</h3>
-							<RiArrowDownSLine size={15} />
-						</div>
-					</div>
-				</div>
+			<div>
+				<TopBar tab='Dashboard'/>
 				<div className='flex justify-between items-center m-5'>
 					<div>
-						<h1 className='text-2xl font-[400]'>Good Evening, Sophie✨ {/* Replace with real user data */}</h1>
+						<h1 className='text-2xl font-[400]'>Good {timeOfDay}, Sophie✨ {/* Replace with real user data */}</h1>
 						<h2 className='text-sm text-gray-500'>Here's your medication overview for today</h2>
 					</div>
 					<div className='flex justify-evenly items-center w-45 p-2 h-10 text-sm rounded-xl text-white bg-oasis-indigo'>

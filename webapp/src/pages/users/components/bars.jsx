@@ -1,5 +1,6 @@
+// Bar Components for consistency across pages
 import React, { useEffect, useRef, useState } from 'react'
-import { RiHome4Line, RiMedicineBottleLine, RiCalendarLine, RiBankCardLine, RiSettings2Line, RiCustomerServiceLine, RiArrowRightSLine, RiVerifiedBadgeFill, RiInformation2Fill } from '@remixicon/react'
+import { RiHome4Line, RiMedicineBottleLine, RiCalendarLine, RiBankCardLine, RiSettings2Line, RiCustomerServiceLine, RiArrowRightSLine, RiVerifiedBadgeFill, RiInformation2Fill, RiSearch2Line, RiNotification3Line, RiCalendarCheckLine, RiArrowDownSLine } from '@remixicon/react'
 
 import whatsapp from '../../../assets/images/whatsapp.png'
 import docnurse from '../../../assets/images/docnurse.png'
@@ -61,9 +62,9 @@ export function NavBar() {
 
 			fetchedTabs.current.add(tabId);
 		}
-		
-    setActiveTab(tabId);
-    setFetchingTab(null);
+
+		setActiveTab(tabId);
+		setFetchingTab(null);
 	};
 	// Mock fetch test
 	// window.fetch = async () => {
@@ -76,13 +77,13 @@ export function NavBar() {
 
 
 	useEffect(() => {
-		 const tabs = document.querySelectorAll('.tab');
-    tabs.forEach((tab) => tab.classList.remove('active'));
+		const tabs = document.querySelectorAll('.tab');
+		tabs.forEach((tab) => tab.classList.remove('active'));
 
-    if (activeTab) {
-      const currentTab = document.getElementById(activeTab);
-      currentTab?.classList.add('active');
-    }
+		if (activeTab) {
+			const currentTab = document.getElementById(activeTab);
+			currentTab?.classList.add('active');
+		}
 	}, [activeTab])
 
 	return (
@@ -151,48 +152,65 @@ export function NavBar() {
 }
 
 
-export function ProgressBar({progress = 0,size = 120}){
+export function ProgressBar({ progress = 0, size = 120 }) {
 	const circleRef = useRef(null);
-  const stroke = 10;
-  const radius = (size - stroke) / 2;
-  const circumference = 2 * Math.PI * radius;
+	const stroke = 10;
+	const radius = (size - stroke) / 2;
+	const circumference = 2 * Math.PI * radius;
 
-  useEffect(() => {
-    const offset = circumference - (progress / 100) * circumference;
-    if (circleRef.current) {
-      circleRef.current.style.strokeDashoffset = offset;
-    }
-  }, [progress, circumference]);
-	 return (
-	 <div className="relative w-[100%] max-w-[200px] aspect-square">
-      <svg viewBox={`0 0 ${size} ${size}`} className="rotate-[-90deg]">
-        {/* Track */}
-        <circle
-          stroke="#e5e7eb"
-          fill="transparent"
-          strokeWidth={stroke}
-          r={radius}
-          cx={size / 2}
-          cy={size / 2}
-        />
-        {/* Progress */}
-        <circle
-          ref={circleRef}
-          stroke="var(--color-oasis-pink)"
-          fill="transparent"
-          strokeWidth={stroke}
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={circumference}
-          r={radius}
-          cx={size / 2}
-          cy={size / 2}
-          className="transition-all duration-500"
-        />
-      </svg>
-      {/* Text */}
-      <div className="absolute inset-0 flex items-center justify-center text-gray-700 font-semibold text-lg">
-        {progress}%
-      </div>
-    </div>
+	useEffect(() => {
+		const offset = circumference - (progress / 100) * circumference;
+		if (circleRef.current) {
+			circleRef.current.style.strokeDashoffset = offset;
+		}
+	}, [progress, circumference]);
+	return (
+		<div className="relative w-[100%] max-w-[200px] aspect-square">
+			<svg viewBox={`0 0 ${size} ${size}`} className="rotate-[-90deg]">
+				{/* Track */}
+				<circle
+					stroke="#e5e7eb"
+					fill="transparent"
+					strokeWidth={stroke}
+					r={radius}
+					cx={size / 2}
+					cy={size / 2}
+				/>
+				{/* Progress */}
+				<circle
+					ref={circleRef}
+					stroke="var(--color-oasis-pink)"
+					fill="transparent"
+					strokeWidth={stroke}
+					strokeLinecap="round"
+					strokeDasharray={circumference}
+					strokeDashoffset={circumference}
+					r={radius}
+					cx={size / 2}
+					cy={size / 2}
+					className="transition-all duration-500"
+				/>
+			</svg>
+			{/* Text */}
+			<div className="absolute inset-0 flex items-center justify-center text-gray-700 font-semibold text-lg">
+				{progress}%
+			</div>
+		</div>
+	)
+}
+
+export function TopBar({ tab = 'Dashboard' }) {
+	return(
+	<div className='flex justify-between items-center m-5 border-b-1 border-gray-300 pb-5'>
+		<h1 className='text-3xl'>{tab}</h1>
+		<div className='flex items-center justify-evenly w-70 '>
+			<RiSearch2Line size={15} />
+			<RiNotification3Line size={15} />
+			<div className='flex items-center justify-evenly cursor-pointer w-45 border-1 border-gray-200 p-2 rounded-xl'>
+				<RiCalendarCheckLine size={15} />
+				<h3 className='text-sm font-[400]'>Quick Actions</h3>
+				<RiArrowDownSLine size={15} />
+			</div>
+		</div>
+	</div>
 )}

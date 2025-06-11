@@ -7,6 +7,7 @@ import SignIn from './pages/SignIn';
 import ResetPassword from './pages/ResetPassword';
 import NewPasswd from './components/NewPasswd';
 import Dashboard from './pages/users/dashboard';
+import Medications from './pages/users/medications';
 
 function App() {
 
@@ -17,7 +18,8 @@ function App() {
 	  {/* <SignIn /> */}
 	  {/* <ResetPassword /> */}
 	  {/* <NewPasswd /> */}
-	  <Dashboard />
+	  {/* <Dashboard /> */}
+	  <Medications />
     </>
   )
 }
