@@ -7,7 +7,7 @@ import docnurse from '../../../assets/images/docnurse.png'
 import logo from '../../../assets/images/logo-transparent.png'
 import linepath from '../../../assets/icons/line-path.png'
 import avatar from '../../../assets/images/Avatar.png'
-
+import { NavLink, Link } from 'react-router-dom'
 
 export function SideBar() {
 	return (
@@ -41,8 +41,8 @@ export function SideBar() {
 	)
 }
 
-export function NavBar() {
-	const [activeTab, setActiveTab] = useState('dashboard');
+export function NavBar({tab='dashboard'}) {
+	const [activeTab, setActiveTab] = useState(tab);
 	const [fetchingTab, setFetchingTab] = useState(null);
 	const fetchedTabs = useRef(new Set());
 
@@ -98,16 +98,20 @@ export function NavBar() {
 			</div>
 			<div className='h-[100%]'>
 				<div className='relative flex items-center h-[40px]'>
-					<div className='w-70 flex ml-5 h-[100%] items-center p-3 rounded-2xl tab active' id='dashboard' onClick={changeActiveTab}>
+					<NavLink to={'/dashboard'} className='w-70 flex ml-5 h-[100%] items-center rounded-2xl tab'>
+					<div className='w-full flex h-[100%] items-center p-3 rounded-2xl tab' id='dashboard' onClick={changeActiveTab}>
 						<RiHome4Line size={18} className='fill-oasis-yellow icon pointer-events-none' />
 						<h3 className='ml-3 text-oasis-yellow text-lg/[20px] tracking-[0.25%] font-["Inter"] pointer-events-none'>Dashboard</h3>
 					</div>
+					</NavLink>
 				</div>
 				<div className='relative flex items-center h-[40px]'>
-					<div className='w-70 flex ml-5 h-[100%] items-center p-3 rounded-2xl tab' id='medications' onClick={changeActiveTab}>
+					<NavLink to={'/medications'} className='w-70 flex ml-5 h-[100%] items-center rounded-2xl tab'>
+					<div className='w-full flex h-[100%] items-center p-3 rounded-2xl tab' id='medications' onClick={changeActiveTab}>
 						<RiMedicineBottleLine size={18} className='fill-oasis-yellow icon pointer-events-none' />
 						<h3 className='ml-3 text-oasis-yellow text-lg/[20px] tracking-[0.25%] font-["Inter"] pointer-events-none'>Medications</h3>
 					</div>
+					</NavLink>
 				</div>
 				<div className='relative flex items-center h-[40px]'>
 					<div className='w-70 flex ml-5 h-[100%] items-center p-3 rounded-2xl tab' id='schedule' onClick={changeActiveTab}>

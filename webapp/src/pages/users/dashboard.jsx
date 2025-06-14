@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { RiCalendarLine, RiMedicineBottleFill, RiCalendarScheduleFill, RiCheckboxCircleFill, RiAlertFill, RiCalendarFill, RiAddFill, RiTimeFill, RiProgress2Fill } from '@remixicon/react'
 import empty from '../../assets/images/empty-states.png'
 import { NavBar, ProgressBar, SideBar, TopBar } from './components/bars'
-import { mockDb, timeOfDay } from './components/misc';
+import { mockDb, timeOfDay, todayScheduleDb } from './components/misc';
 
 
 function Dashboard() {
@@ -10,15 +10,17 @@ function Dashboard() {
 	const date = new Date();
 	// setIsEmpty(false)
 
-	const mockDB = mockDb.filter((item) => item.time.getDate() === date.getDate())
+	const mockDB = todayScheduleDb.filter((item) => item.time.getDate() === date.getDate())
 
 
-	const totalDaily = mockDB.length;
-	const taken = mockDB.filter(item => item.status === 'completed').length;
-	const missed = mockDB.filter(item => item.status === 'missed').length;
-	const active = mockDB.filter(item => item.status === 'pending').length;
+	const totalDaily = todayScheduleDb.length;
+	const taken = todayScheduleDb.filter(item => item.status === 'completed').length;
+	const missed = todayScheduleDb.filter(item => item.status === 'missed').length;
+	const active = mockDb.filter(item => item.medicationStatus === 'Active').length;
 	const nextMed = mockDB.filter(item => item.status === 'pending')[0];
 
+	console.log(todayScheduleDb);
+	console.log(mockDB);
 
 
 	return (

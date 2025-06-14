@@ -8,19 +8,20 @@ import ResetPassword from './pages/ResetPassword';
 import NewPasswd from './components/NewPasswd';
 import Dashboard from './pages/users/dashboard';
 import Medications from './pages/users/medications';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
 
   return (
-    <>
-	  {/* <SignUp /> */}
+    <Routes>
+	  <Route path='signup' element={<SignUp />} />
 	  {/* <Verification mode='signup' type='reset'/> */}
-	  {/* <SignIn /> */}
+	  <Route path='signin' element={<SignIn />} />
 	  {/* <ResetPassword /> */}
 	  {/* <NewPasswd /> */}
-	  {/* <Dashboard /> */}
-	  <Medications />
-    </>
+	  <Route path='dashboard' element={<Dashboard />} />
+	  <Route path='medications' element={<Medications />}/>
+    </Routes>
   )
 }
 
